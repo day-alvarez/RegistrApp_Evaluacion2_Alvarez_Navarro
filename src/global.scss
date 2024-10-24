@@ -112,3 +112,36 @@ ion-datetime {
     padding: 0.5rem; /* Ajusta el padding para pantallas pequeñas */
   }
 }
+/* Archivo: variables.scss */
+
+/* Modo claro (por defecto) */
+:root {
+  --ion-background-color: #ffffff;
+  --ion-text-color: #000000;
+  --ion-color-primary: #007bff;
+  --ion-color-secondary: #6c757d;
+  --ion-color-tertiary: #f4f5f8;
+  --ion-color-light: #ffffff;
+  --ion-color-dark: #000000;
+
+  /* Personalización específica para elementos */
+  --login-box-bg: rgba(255, 255, 255, 0.9);
+  --login-text-color: #444;
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-background-color: #1e1e1e;
+    --ion-text-color: #ffffff;
+    --ion-color-primary: #1e90ff;
+    --ion-color-secondary: #6c757d;
+    --ion-color-tertiary: #2e2e2e;
+    --ion-color-light: #2e2e2e;
+    --ion-color-dark: #ffffff;
+
+    /* Personalización específica para elementos */
+    --login-box-bg: rgba(0, 0, 0, 0.8);
+    --login-text-color: #ffffff;
+  }
+}

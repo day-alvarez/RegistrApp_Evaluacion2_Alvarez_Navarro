@@ -12,12 +12,21 @@ import { PresenteprofeService } from '../services/presenteprofe.service';
 export class LoginPage implements OnInit {
   public username: string;
   public password: string;
+  passwordType: string = 'password';  // Tipo de entrada por defecto
+  passwordIcon: string = 'eye-off-outline';  // Ícono por defecto
+  
+
 
   constructor(private navCtrl: NavController, private router: Router, private presenteprofe: PresenteprofeService) {
     this.username = '';
     this.password = '';
   }
-
+  togglePasswordVisibility(): void {
+    // Cambia entre 'password' y 'text'
+    this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
+    // Cambia el ícono entre 'eye-off' y 'eye'
+    this.passwordIcon = this.passwordIcon === 'eye-off-outline' ? 'eye-outline' : 'eye-off-outline';
+  }
   onLogin() {
     this.presenteprofe.login(this.username, this.password).subscribe(
       (response) => {
@@ -36,6 +45,9 @@ export class LoginPage implements OnInit {
     );
   }
 
+  openUrl(url: string) {
+    window.open(url, '_balck');
+  }
 
   ngOnInit() {}
 }

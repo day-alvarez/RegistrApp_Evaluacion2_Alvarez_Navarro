@@ -1,39 +1,73 @@
-  
-  .header-text {
-    text-align: center;
-    color: #333;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .course-container {
-    display: flex;
-    justify-content: space-around; 
-    flex-wrap: wrap; 
-  }
-  
-  .custom-card {
-    width: 300px;
-    height: 350px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    background-color: #ffffff; 
-    display: flex;
-    flex-direction: column; 
-    justify-content: space-between;
-    opacity: 88%;
-  }
-  
-  .card-title {
-    font-size: 18px; 
-    color: #333;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  
+.course-container {
+  display: flex;
+  justify-content: center; /* Centramos las cartas */
+  flex-wrap: wrap; /* Permitimos que las cartas se ajusten en diferentes filas */
+  gap: 15px; /* Añadimos espacio entre las cartas */
+}
+
+.custom-card {
+  width: 220px; /* Reducimos el ancho de las cartas */
+  height: 300px; /* Ajustamos la altura de las cartas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Mantenemos la sombra */
+  background-color: #ffffff; 
+  display: flex;
+  flex-direction: column; /* Mantenemos los elementos en columna */
+  justify-content: space-between; /* Distribuimos el espacio entre los elementos */
+  opacity: 88%; /* Ajustamos la opacidad */
+  border-radius: 10px; /* Suavizamos las esquinas */
+}
+
+.card-title {
+  font-size: 16px; /* Reducimos el tamaño del texto del título */
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px; /* Añadimos un pequeño margen inferior */
+}
+
+.course-sigla {
+  font-size: 14px; /* Ajustamos el tamaño de la sigla */
+  color: #555;
+  text-align: center;
+}
+
+.curso-imagen {
+  width: 100%; /* Ajustamos el ancho de la imagen al 100% de la carta */
+  height: auto; /* Mantener las proporciones de la imagen */
+  margin-bottom: 10px; /* Añadimos espacio debajo de la imagen */
+}
+
+.course-institucion {
+  font-size: 12px; /* Ajustamos el tamaño del texto de la institución */
+  color: #777;
+  text-align: center;
+  margin-bottom: 10px; /* Añadimos espacio entre la institución y el botón */
+}
+ion-button {
+  font-size: 14px; /* Ajustamos el tamaño del texto en el botón */
+  height: 40px; /* Reducimos un poco la altura del botón */
+  --border-radius: 8px; /* Hacemos que el botón tenga esquinas más redondeadas */
+  margin-top: auto; /* Aseguramos que el botón esté en la parte inferior de la carta */
+}
+
 
  
   
   ion-content {
     --background: url('https://media.istockphoto.com/id/1353473723/es/foto/fondo-abstracto-de-movimiento-borroso-desenfocado-amarillo-y-naranja-soleado.jpg?s=612x612&w=0&k=20&c=szFbBBCrxvfx9E0AGDVBOP6F4gRSH6zliCQcKPxJKrE=') 0 0 / 100% 100% no-repeat;
+}
+@media (max-width: 768px) {
+  .custom-card {
+    width: 180px; /* Ajustamos el tamaño de la carta en pantallas más pequeñas */
+    height: 270px; /* Ajustamos la altura de las cartas para pantallas más pequeñas */
+  }
+
+  .card-title {
+    font-size: 14px; /* Reducimos un poco el tamaño del título en pantallas pequeñas */
+  }
+
+  ion-button {
+    font-size: 13px; /* Reducimos un poco el texto del botón en pantallas pequeñas */
+    height: 35px; /* Reducimos la altura del botón en pantallas pequeñas */
+  }
 }

@@ -39,22 +39,17 @@
   <h2 class="header-text">Cursos</h2>
   
   <div class="course-container">
-    <!-- Mostrar cada curso usando *ngFor -->
     <ion-card class="custom-card" *ngFor="let curso of cursos">
       <ion-card-header>
-        <ion-card-title class="card-title">{{ curso.nombre }}</ion-card-title> <!-- Nombre del curso -->
-        <p class="course-sigla">{{ curso.sigla }}</p> <!-- Sigla del curso -->
-        
-        <!-- Imagen del curso -->
-        <img src="{{ curso.imagen }}" alt="{{ curso.nombre }}" class="curso-imagen"> 
-        
-        <p class="course-institucion">{{ curso.institucion }}</p> <!-- Institución -->
-        
-        <!-- Botón "Ingresar" -->
+        <ion-card-title class="card-title">{{ curso.nombre }}</ion-card-title>
+        <p class="course-sigla">{{ curso.sigla }}</p>
+        <img src="{{ curso.imagen }}" alt="{{ curso.nombre }}" class="curso-imagen">
+        <p class="course-institucion">{{ curso.institucion }}</p>
         <ion-button color="secondary" expand="full" (click)="ingresarCurso(curso.id)">
           Ingresar
         </ion-button>
       </ion-card-header>
     </ion-card>
   </div>
+  
 </ion-content>
