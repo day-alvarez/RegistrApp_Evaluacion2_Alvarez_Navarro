@@ -17,12 +17,18 @@
       <ion-button class="login-button" (click)="login()" fill="clear">
         Ingresar
       </ion-button>
-      
 
-      <ion-label class="forgot-password" [routerLink]="['/recuperar']">
-        ¿Olvidaste tu contraseña?
-      </ion-label>
+      <!-- Botón de registro -->
+      <ion-button class="register-button" (click)="navigateToRegister()" expand="full" color="secondary">
+        Registrarse
+      </ion-button>
 
+      <!-- Iconos de redes sociales -->
+      <div class="social-icons">
+        <ion-icon name="logo-facebook" (click)="openUrl('https://www.facebook.com')"></ion-icon>
+        <ion-icon name="logo-instagram" (click)="openUrl('https://www.instagram.com')"></ion-icon>
+        <ion-icon name="logo-github" (click)="openUrl('https://www.github.com')"></ion-icon>
+      </div>
     </div>
   </div>
 </ion-content>

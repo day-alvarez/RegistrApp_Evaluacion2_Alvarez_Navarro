@@ -14,4 +14,11 @@ export class InicioPage {
     console.log('Navegar al login');
     this.router.navigate(['/login']);
   }
+  
+  openUrl(url: string) {
+    window.open(url, '_balck');
+  }
+  navigateToRegister() {
+    this.router.navigate(['/registro']); // Cambia a la ruta correcta de tu página de registro
+  }
 }

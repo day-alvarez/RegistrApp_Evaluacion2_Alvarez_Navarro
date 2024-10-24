@@ -36,9 +36,6 @@ export class LoginPage implements OnInit {
     );
   }
 
-  openUrl(url: string) {
-    window.open(url, '_balck');
-  }
 
   ngOnInit() {}
 }

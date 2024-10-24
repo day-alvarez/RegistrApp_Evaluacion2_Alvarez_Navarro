@@ -1,89 +1,69 @@
-
-.login-card {
-  background: #ffffff; /* Fondo blanco */
-  border-radius: 15px; /* Bordes redondeados */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombras más suaves */
-  width: 80%;
-  max-width: 400px; /* Limita el ancho máximo en pantallas grandes */
-  padding: 20px; /* Agrega un padding interno */
-  opacity: 90%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+/* Estilos generales para una apariencia moderna y atractiva */
+.login-box {
+  background: rgba(255, 255, 255, 0.9); /* Fondo translúcido */
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  margin: auto;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efecto al hacer hover en la tarjeta */
-.login-card:hover {
-  transform: translateY(-5px); /* Eleva un poco la tarjeta al pasar el mouse */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Aumenta la sombra */
+.login-box:hover {
+  transform: translateY(-10px); /* Sutil animación al pasar el mouse */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
-.user-icon {
-  font-size: 50px;
-  color: #000000;
-  margin-bottom: 10px;
+.greeting-text {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #444;
 }
 
-.app-title {
-  font-size: 24px;
-  margin: 10px 0;
+.login-item {
+  margin-bottom: 25px;
 }
 
-.input-container {
-  width: 100%;
+.login-btn {
+  margin-top: 30px;
+  background-color: #007bff; /* Cambiar color a un azul más vivo */
+  color: white;
+  transition: background-color 0.3s ease;
 }
 
-ion-item {
-  min-height: 45px;
-}
-
-.login-button {
-  width: 100%;
-  margin-top: 10px;
+.login-btn:hover {
+  background-color: #0056b3; /* Efecto hover */
 }
 
 .recover-password {
+  display: block;
+  margin-top: 15px;
   cursor: pointer;
-  color: var(--text-color);
-  margin-top: 10px;
+  color: var(--ion-color-secondary);
+  font-size: 0.9em;
 }
 
-/* Imagen de fondo responsiva */
+/* Fondo personalizado */
 ion-content {
   --background: url('https://media.istockphoto.com/id/1353473723/es/foto/fondo-abstracto-de-movimiento-borroso-desenfocado-amarillo-y-naranja-soleado.jpg?s=612x612&w=0&k=20&c=szFbBBCrxvfx9E0AGDVBOP6F4gRSH6zliCQcKPxJKrE=') center center / cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Centrado vertical */
 }
 
-/* Responsividad en pantallas pequeñas */
+/* Adaptabilidad para pantallas pequeñas */
 @media (max-width: 600px) {
-  .login-card {
+  .login-box {
+    width: 90%;
     padding: 20px;
-    margin-top: 50px; /* Reduce el margen superior en pantallas pequeñas */
-  }
-
-  .user-icon {
-    font-size: 40px;
-  }
-
-  .app-title {
-    font-size: 18px;
   }
 }
 
-/* Responsividad en pantallas grandes */
+/* Adaptabilidad para pantallas grandes */
 @media (min-width: 1024px) {
-  .login-card {
-    max-width: 600px;
-    padding: 50px;
-    margin-top: 150px; /* Aumenta el margen superior en pantallas grandes */
-    width: 90%; /* Reduce el ancho en pantallas pequeñas */
-    padding: 15px; /* Ajusta el padding para pantallas pequeñas */
+  .login-box {
+    max-width: 500px;
+    margin-top: 100px;
   }
-
-  .user-icon {
-    font-size: 60px;
-  }
-
-  .app-title {
-    font-size: 30px;
-  }
- 
- 
 }

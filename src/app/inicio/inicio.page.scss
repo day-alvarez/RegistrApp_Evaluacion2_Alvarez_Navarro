@@ -93,6 +93,20 @@ ion-title {
     margin: 0; 
 }
 
+/* Sección de redes sociales */
+.social-icons {
+    margin-top: 40px; /* Añadir más espacio encima de los íconos */
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Separación entre los íconos */
+}
+
+.social-icons ion-icon {
+    font-size: 32px; /* Aumentar el tamaño de los íconos */
+    cursor: pointer;
+    color: black; /* Cambiar color si lo deseas */
+}
+
 @media (max-width: 768px) {
     .paw-logo {
         width: 40px; 
@@ -123,6 +137,10 @@ ion-title {
     .square-button {
         margin: 10px 0; 
     }
+
+    .social-icons ion-icon {
+        font-size: 28px; /* Ajustar el tamaño en pantallas más pequeñas */
+    }
 }
 
 @media (max-width: 480px) {
@@ -137,5 +155,8 @@ ion-title {
     .square-button {
         margin: 0 5px; 
     }
+    
+    .social-icons ion-icon {
+        font-size: 24px; 
+    }
 }
-
