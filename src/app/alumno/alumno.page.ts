@@ -28,9 +28,9 @@ export class AlumnoPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.username = params['nombre'] || 'No existe';
     });
-    this.usuario = localStorage.getItem('usuario');  // Obtener el usuario de localStorage
+    this.usuario = localStorage.getItem('usuario');  
     if (this.usuario) {
-      this.cargarCursos();  // Cargar los cursos si el usuario no es null
+      this.cargarCursos(); 
     } else {
       console.error('No se encontró un usuario válido');
     }
@@ -39,8 +39,8 @@ export class AlumnoPage implements OnInit {
   cargarCursos() {
     this.presenteprofeService.getCursos(this.usuario!).subscribe(
       (response) => {
-        this.cursos = response.cursos;  // Asignamos los cursos obtenidos a la variable 'cursos'
-        console.log(this.cursos);  // Muestra los cursos en la consola
+        this.cursos = response.cursos; 
+        console.log(this.cursos);  
       },
       (error) => {
         console.error('Error al cargar los cursos', error);
@@ -56,7 +56,6 @@ export class AlumnoPage implements OnInit {
   }
   ingresarCurso(cursoId: string) {
     console.log('Ingresando al curso con ID:', cursoId);
-    // Lógica adicional para ingresar al curso, por ejemplo redirigir a otra página
   }
 
   openMenu() {
@@ -74,4 +73,5 @@ export class AlumnoPage implements OnInit {
     console.log('Cerrar sesión');
     this.router.navigate(['/login']); 
   }
+  
 }

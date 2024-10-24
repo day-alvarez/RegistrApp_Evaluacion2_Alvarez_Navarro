@@ -8,8 +8,8 @@ import { PresenteprofeService } from '../services/presenteprofe.service';
   styleUrls: ['./cursos.page.scss'],
 })
 export class CursosPage implements OnInit {
-  curso: string=''; //ID del Curso
-  nombre: string=''; //Nombre curso
+  curso: string=''; 
+  nombre: string='';
   imagen: string='';
   selectedSegment: string = 'mi-espacio';
   qrData: string | null = null;
@@ -26,8 +26,8 @@ export class CursosPage implements OnInit {
    })
   }
   generarQR() {
-    // Genera un QR con un contenido fijo o dinámico
-    this.qrData = `QR generado el: ${new Date().toLocaleString()}`; // Puedes cambiar el contenido a lo que necesites
+ 
+    this.qrData = `QR generado el: ${new Date().toLocaleString()}`; 
     console.log('Generar QR:', this.qrData);
   }
   

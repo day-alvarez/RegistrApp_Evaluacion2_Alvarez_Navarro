@@ -6,32 +6,44 @@
 
 <ion-content [fullscreen]="true">
   <div class="registration-container">
-    <h1 class="greeting-text">Crear Cuenta</h1>
+    <ion-card class="custom-card">
+      <ion-card-header>
+        <ion-card-title class="greeting-text">Crear Cuenta</ion-card-title>
+      </ion-card-header>
 
-    <ion-list>
-      <ion-item>
-        <ion-input [(ngModel)]="codigo" label="Código" labelPlacement="floating" placeholder="Código"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input [(ngModel)]="run" label="RUN" labelPlacement="floating" placeholder="12345678-9"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input [(ngModel)]="nombre" label="Nombre" labelPlacement="floating" placeholder="Nombre"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input [(ngModel)]="apellido" label="Apellido" labelPlacement="floating" placeholder="Apellido"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input [(ngModel)]="correo" label="Correo" labelPlacement="floating" placeholder="correo@gmail.com"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-select [(ngModel)]="perfil" placeholder="Perfil">
-          <ion-select-option value="docente">Docente</ion-select-option>
-          <ion-select-option value="estudiante">Estudiante</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-input [(ngModel)]="codigo" required label="Código" labelPlacement="floating" placeholder="Código"></ion-input>
+            <ion-note *ngIf="codigoError" color="danger">Este campo es obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-input [(ngModel)]="run" required label="RUN" labelPlacement="floating" placeholder="12345678-9"></ion-input>
+            <ion-note *ngIf="runError" color="danger">Este campo es obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-input [(ngModel)]="nombre" required label="Nombre" labelPlacement="floating" placeholder="Nombre"></ion-input>
+            <ion-note *ngIf="nombreError" color="danger">Este campo es obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-input [(ngModel)]="apellido" required label="Apellido" labelPlacement="floating" placeholder="Apellido"></ion-input>
+            <ion-note *ngIf="apellidoError" color="danger">Este campo es obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-input [(ngModel)]="correo" required label="Correo" labelPlacement="floating" placeholder="correo@gmail.com"></ion-input>
+            <ion-note *ngIf="correoError" color="danger">Este campo es obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-select [(ngModel)]="perfil" required placeholder="Perfil">
+              <ion-select-option value="docente">Docente</ion-select-option>
+              <ion-select-option value="estudiante">Estudiante</ion-select-option>
+            </ion-select>
+            <ion-note *ngIf="perfilError" color="danger">Este campo es obligatorio</ion-note>
+          </ion-item>
+        </ion-list>
 
-    <ion-button expand="full" (click)="register()">Registrarse</ion-button>
+        <ion-button expand="full" (click)="register()">Registrarse</ion-button>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

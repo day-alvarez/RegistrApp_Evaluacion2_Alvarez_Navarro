@@ -20,18 +20,18 @@ export class ProfesorPage implements OnInit {
     this.route.queryParams.subscribe(params=>{
        this.username = params['nombre']||'No existe';
     })
-    this.usuario = localStorage.getItem('usuario');  // Obtener el usuario de localStorage
+    this.usuario = localStorage.getItem('usuario'); 
     if (this.usuario) {
-      this.cargarCursos();  // Cargar los cursos si el usuario no es null
+      this.cargarCursos();  
     } else {
       console.error('No se encontró un usuario válido');
     }
   }
   cargarCursos() {
-    this.presenteprofeService.getCursos(this.usuario!).subscribe(  // Asegúrate de usar el operador de afirmación no nulo (!)
+    this.presenteprofeService.getCursos(this.usuario!).subscribe(  
       (response) => {
-        this.cursos = response.cursos;  // Asignamos los cursos obtenidos a la variable 'cursos'
-        console.log(this.cursos);  // Muestra los cursos en la consola
+        this.cursos = response.cursos;  
+        console.log(this.cursos);  
       },
       (error) => {
         console.error('Error al cargar los cursos', error);

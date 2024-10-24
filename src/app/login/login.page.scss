@@ -1,6 +1,6 @@
 
 .login-box {
-  background: rgba(255, 255, 255, 0.9); /* Fondo translúcido */
+  background: rgba(255, 255, 255, 0.9); 
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   padding: 30px;
@@ -11,7 +11,7 @@
 }
 
 .login-box:hover {
-  transform: translateY(-10px); /* Sutil animación al pasar el mouse */
+  transform: translateY(-10px); 
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
@@ -27,13 +27,13 @@
 
 .login-btn {
   margin-top: 30px;
-  background-color: #007bff; /* Cambiar color a un azul más vivo */
+  background-color: #007bff; 
   color: white;
   transition: background-color 0.3s ease;
 }
 
 .login-btn:hover {
-  background-color: #0056b3; /* Efecto hover */
+  background-color: #0056b3; 
 }
 
 .recover-password {
@@ -44,16 +44,15 @@
   font-size: 0.9em;
 }
 
-/* Fondo personalizado */
+
 ion-content {
   --background: url('https://media.istockphoto.com/id/1353473723/es/foto/fondo-abstracto-de-movimiento-borroso-desenfocado-amarillo-y-naranja-soleado.jpg?s=612x612&w=0&k=20&c=szFbBBCrxvfx9E0AGDVBOP6F4gRSH6zliCQcKPxJKrE=') center center / cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Centrado vertical */
+  min-height: 100vh; 
 }
 
-/* Adaptabilidad para pantallas pequeñas */
 @media (max-width: 600px) {
   .login-box {
     width: 90%;
@@ -61,7 +60,6 @@ ion-content {
   }
 }
 
-/* Adaptabilidad para pantallas grandes */
 @media (min-width: 1024px) {
   .login-box {
     max-width: 500px;

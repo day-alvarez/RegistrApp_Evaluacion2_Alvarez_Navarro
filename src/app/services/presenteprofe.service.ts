@@ -22,27 +22,26 @@ export class PresenteprofeService {
   
   // Método para registrar un nuevo usuario
   register(userData: any): Observable<any> {
-    return this.http.post(`${this.apiURL}/usuarios`, userData); // Asegúrate de que 'apiURL' sea correcto
+    return this.http.post(`${this.apiURL}/usuarios`, userData); 
   }
-  
-  
 
   // Método para obtener cursos del usuario
   getCursos(username: string): Observable<any> {
     const url = `${this.apiURL}/cursos`;  
-    const params = new HttpParams().set('user', username); // Configura los parámetros de la URL
-    return this.http.get<any>(url, { params });  // Pasamos los parámetros en el objeto de opciones
+    const params = new HttpParams().set('user', username); 
+    return this.http.get<any>(url, { params });  
   }
 
   // Método para obtener un curso por ID
   getCursoById(username: string, cursoId: string): Observable<any> {
-    const url = `${this.apiURL}/cursos/${cursoId}`; // Ruta para obtener el curso
-    const params = new HttpParams().set('user', username); // Configura el parámetro de usuario
-    return this.http.get<any>(url, { params }); // Llamada a la API para obtener el curso
+    const url = `${this.apiURL}/cursos/${cursoId}`; 
+    const params = new HttpParams().set('user', username); 
+    return this.http.get<any>(url, { params }); 
   }
 
-  // Método alternativo para obtener cursos (redundante, puedes eliminarlo si no lo usas)
-  getCursos2(username: string) {
-    return this.http.get(`${this.apiURL}/cursos?user=${username}`);
+  // Método para recuperar la contraseña
+  recuperarContrasena(body: { correo: string }): Observable<any> {
+    // Cambiar la ruta a la correcta para la recuperación de contraseña
+    return this.http.post(`${this.apiURL}/auth/recuperar`, body);
   }
 }

@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Detalles del Curso</ion-title>
+  <ion-toolbar >
+    <ion-title>Curso</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,9 +11,17 @@
       <ion-card-title>{{ nombre }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-button (click)="generarQR()">Generar QR</ion-button>
-      <qrcode [qrdata]="qrData" [width]="200" *ngIf="qrData"></qrcode>
+      <p>Descripción u otra información del curso aquí...</p>
     </ion-card-content>
   </ion-card>
-  <ion-text *ngIf="!imagen">Cargando curso...</ion-text>
+
+  <div class="qr-container">
+    <ion-button (click)="generarQR()" expand="block" color="secondary">Generar QR</ion-button>
+  </div>
+
+  <div class="qr-container" *ngIf="qrData">
+    <qrcode [qrdata]="qrData" [width]="200"></qrcode>
+  </div>
+
+  <ion-text class="loading-text" *ngIf="!imagen">Cargando curso...</ion-text>
 </ion-content>

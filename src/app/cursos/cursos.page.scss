@@ -1,29 +1,42 @@
 ion-header {
-  --background: #3880ff; /* Fondo del encabezado con color primario */
+  --background: #000000; 
 }
 
-ion-text {
-  margin-top: 20px; /* Margen superior para el texto de encabezado */
+.loading-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.2rem;
+  color: #fff;
 }
 
 .qr-container {
   display: flex;
-  justify-content: center; /* Centra el QR en la pantalla */
+  justify-content: center;
   align-items: center;
-  margin-top: 40px; /* Margen superior para separar el QR del input */
+  margin-top: 20px; 
 }
 
-ion-item {
-  margin: 20px;
-  border-radius: 8px;
-  --background: #f0f0f5; /* Fondo más claro para el input */
-  --color-focused: #3880ff; /* Color del borde cuando se enfoca */
+ion-button {
+  margin-top: 20px;
+  --border-radius: 10px;
+  --box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+ion-card {
+  --background: rgba(255, 255, 255, 0.8); 
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+ion-card-title {
   font-size: 1.5rem;
   font-weight: bold;
+  color: #333;
 }
+
 ion-content {
-  --background: url('https://media.istockphoto.com/id/1353473723/es/foto/fondo-abstracto-de-movimiento-borroso-desenfocado-amarillo-y-naranja-soleado.jpg?s=612x612&w=0&k=20&c=szFbBBCrxvfx9E0AGDVBOP6F4gRSH6zliCQcKPxJKrE=') 0 0 / 100% 100% no-repeat;
+  --background: url('https://media.istockphoto.com/id/1353473723/es/foto/fondo-abstracto-de-movimiento-borroso-desenfocado-amarillo-y-naranja-soleado.jpg?s=612x612&w=0&k=20&c=szFbBBCrxvfx9E0AGDVBOP6F4gRSH6zliCQcKPxJKrE=') no-repeat center center / cover;
+  --padding-top: 20px;
 }
