@@ -1,0 +1,28 @@
+<ion-content [fullscreen]="true" class="login-content">
+  <div class="title-container">
+    <img
+      src="https://cdn-icons-png.freepik.com/512/7238/7238745.png"
+      alt="Paw Logo"
+      class="paw-logo"
+    />
+    <div class="title-wrapper">
+      <ion-title class="ion-text-uppercase ion-text-bold">Popsipatitas Duoc</ion-title>
+    </div>
+  </div>
+
+  <div class="login-container">
+    <div class="login-card">
+      <h1 class="greeting-text">Bienvenido</h1>
+
+      <ion-button class="login-button" (click)="login()" fill="clear">
+        Ingresar
+      </ion-button>
+      
+
+      <ion-label class="forgot-password" [routerLink]="['/recuperar']">
+        ¿Olvidaste tu contraseña?
+      </ion-label>
+
+    </div>
+  </div>
+</ion-content>

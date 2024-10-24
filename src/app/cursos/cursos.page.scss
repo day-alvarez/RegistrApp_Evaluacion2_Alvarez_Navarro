@@ -1,0 +1,26 @@
+ion-header {
+  --background: #3880ff; /* Fondo del encabezado con color primario */
+}
+
+ion-text {
+  margin-top: 20px; /* Margen superior para el texto de encabezado */
+}
+
+.qr-container {
+  display: flex;
+  justify-content: center; /* Centra el QR en la pantalla */
+  align-items: center;
+  margin-top: 40px; /* Margen superior para separar el QR del input */
+}
+
+ion-item {
+  margin: 20px;
+  border-radius: 8px;
+  --background: #f0f0f5; /* Fondo más claro para el input */
+  --color-focused: #3880ff; /* Color del borde cuando se enfoca */
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}

@@ -1,0 +1,89 @@
+
+.login-card {
+  background: #ffffff; /* Fondo blanco */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombras más suaves */
+  width: 80%;
+  max-width: 400px; /* Limita el ancho máximo en pantallas grandes */
+  padding: 20px; /* Agrega un padding interno */
+  opacity: 90%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+/* Efecto al hacer hover en la tarjeta */
+.login-card:hover {
+  transform: translateY(-5px); /* Eleva un poco la tarjeta al pasar el mouse */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Aumenta la sombra */
+}
+
+.user-icon {
+  font-size: 50px;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+.app-title {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.input-container {
+  width: 100%;
+}
+
+ion-item {
+  min-height: 45px;
+}
+
+.login-button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.recover-password {
+  cursor: pointer;
+  color: var(--text-color);
+  margin-top: 10px;
+}
+
+/* Imagen de fondo responsiva */
+ion-content {
+  --background: url('https://media.istockphoto.com/id/1353473723/es/foto/fondo-abstracto-de-movimiento-borroso-desenfocado-amarillo-y-naranja-soleado.jpg?s=612x612&w=0&k=20&c=szFbBBCrxvfx9E0AGDVBOP6F4gRSH6zliCQcKPxJKrE=') center center / cover no-repeat;
+}
+
+/* Responsividad en pantallas pequeñas */
+@media (max-width: 600px) {
+  .login-card {
+    padding: 20px;
+    margin-top: 50px; /* Reduce el margen superior en pantallas pequeñas */
+  }
+
+  .user-icon {
+    font-size: 40px;
+  }
+
+  .app-title {
+    font-size: 18px;
+  }
+}
+
+/* Responsividad en pantallas grandes */
+@media (min-width: 1024px) {
+  .login-card {
+    max-width: 600px;
+    padding: 50px;
+    margin-top: 150px; /* Aumenta el margen superior en pantallas grandes */
+    width: 90%; /* Reduce el ancho en pantallas pequeñas */
+    padding: 15px; /* Ajusta el padding para pantallas pequeñas */
+  }
+
+  .user-icon {
+    font-size: 60px;
+  }
+
+  .app-title {
+    font-size: 30px;
+  }
+ 
+ 
+}

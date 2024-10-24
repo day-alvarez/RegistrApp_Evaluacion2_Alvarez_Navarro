@@ -1,0 +1,39 @@
+  
+  .header-text {
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .course-container {
+    display: flex;
+    justify-content: space-around; 
+    flex-wrap: wrap; 
+  }
+  
+  .custom-card {
+    width: 300px;
+    height: 350px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    background-color: #ffffff; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    opacity: 88%;
+  }
+  
+  .card-title {
+    font-size: 18px; 
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  
+
+ 
+  
+  ion-content {
+    --background: url('https://media.istockphoto.com/id/1353473723/es/foto/fondo-abstracto-de-movimiento-borroso-desenfocado-amarillo-y-naranja-soleado.jpg?s=612x612&w=0&k=20&c=szFbBBCrxvfx9E0AGDVBOP6F4gRSH6zliCQcKPxJKrE=') 0 0 / 100% 100% no-repeat;
+}

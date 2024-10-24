@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Detalles del Curso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngIf="imagen">
+    <img [src]="imagen" alt="{{ nombre }}" />
+    <ion-card-header>
+      <ion-card-title>{{ nombre }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="generarQR()">Generar QR</ion-button>
+      <qrcode [qrdata]="qrData" [width]="200" *ngIf="qrData"></qrcode>
+    </ion-card-content>
+  </ion-card>
+  <ion-text *ngIf="!imagen">Cargando curso...</ion-text>
+</ion-content>
