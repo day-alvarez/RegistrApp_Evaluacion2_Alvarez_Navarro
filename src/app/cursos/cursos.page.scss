@@ -41,59 +41,34 @@ ion-content {
   --padding-top: 20px;
 }
 
-/* Estilo para la imagen del curso */
-.course-image {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  object-fit: cover;
-  margin-bottom: 16px;
-}
-
-/* Contenedor de los botones QR */
+/* Estilos para el contenedor de QR */
 .qr-container {
   margin-top: 20px;
 }
 
-/* Mensaje de carga */
+/* Estilo para la imagen del curso */
+ion-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+/* Centrar texto y ajustes de carga */
 .loading-text {
-  display: block;
   text-align: center;
-  margin-top: 20px;
   color: #888;
+  margin-top: 20px;
 }
 
-/* Personalización del toolbar */
-ion-toolbar {
-  --background: #007bff; /* Cambia el color de fondo de la barra de navegación */
-  color: white;
+/* Pestañas scrollables para pantallas pequeñas */
+ion-segment {
+  width: 100%;
 }
 
-/* Personalización del avatar */
-ion-avatar img {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-}
-
-/* Estilo de los ítems de la lista */
-ion-item {
-  --background: #fff;
-  --border-color: #ddd;
+/* Estilos para el botón QR */
+ion-button {
+  margin-top: 10px;
   font-size: 16px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-ion-item:hover {
-  background-color: #f0f0f0;
-}
-
-/* Icono e imagen del avatar */
-ion-avatar {
-  margin-right: 10px;
-}
-
-ion-label {
-  font-size: 18px;
 }
