@@ -40,3 +40,60 @@ ion-content {
   --background: url('https://media.istockphoto.com/id/1353473723/es/foto/fondo-abstracto-de-movimiento-borroso-desenfocado-amarillo-y-naranja-soleado.jpg?s=612x612&w=0&k=20&c=szFbBBCrxvfx9E0AGDVBOP6F4gRSH6zliCQcKPxJKrE=') no-repeat center center / cover;
   --padding-top: 20px;
 }
+
+/* Estilo para la imagen del curso */
+.course-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+/* Contenedor de los botones QR */
+.qr-container {
+  margin-top: 20px;
+}
+
+/* Mensaje de carga */
+.loading-text {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #888;
+}
+
+/* Personalización del toolbar */
+ion-toolbar {
+  --background: #007bff; /* Cambia el color de fondo de la barra de navegación */
+  color: white;
+}
+
+/* Personalización del avatar */
+ion-avatar img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+/* Estilo de los ítems de la lista */
+ion-item {
+  --background: #fff;
+  --border-color: #ddd;
+  font-size: 16px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+ion-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Icono e imagen del avatar */
+ion-avatar {
+  margin-right: 10px;
+}
+
+ion-label {
+  font-size: 18px;
+}

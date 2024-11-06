@@ -13,6 +13,7 @@ export class CursosPage implements OnInit {
   imagen: string='';
   selectedSegment: string = 'mi-espacio';
   qrData: string | null = null;
+  selectedTab: string = 'curso'; // "curso" es la pestaña predeterminada
 
   constructor(private route: ActivatedRoute, private presenteprofeService: PresenteprofeService) {}
 
@@ -30,5 +31,6 @@ export class CursosPage implements OnInit {
     this.qrData = `QR generado el: ${new Date().toLocaleString()}`; 
     console.log('Generar QR:', this.qrData);
   }
+  
   
 }

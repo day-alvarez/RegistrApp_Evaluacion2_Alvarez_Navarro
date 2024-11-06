@@ -1,27 +1,124 @@
 <ion-header [translucent]="true">
-  <ion-toolbar >
-    <ion-title>Curso</ion-title>
+  <ion-toolbar>
+    <ion-title>{{ nombre }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card *ngIf="imagen">
-    <img [src]="imagen" alt="{{ nombre }}" />
-    <ion-card-header>
-      <ion-card-title>{{ nombre }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Descripción u otra información del curso aquí...</p>
-    </ion-card-content>
-  </ion-card>
+  <ion-row>
+    <!-- Columna para la imagen del curso -->
+    <ion-col size="12" size-md="4">
+      <ion-card *ngIf="imagen">
+        <img [src]="imagen" alt="{{ nombre }}" />
+      </ion-card>
+    </ion-col>
 
-  <div class="qr-container">
-    <ion-button (click)="generarQR()" expand="block" color="secondary">Generar QR</ion-button>
-  </div>
+    <!-- Columna para las pestañas y contenido -->
+    <ion-col size="12" size-md="8">
+      <!-- Contenedor de Tabs -->
+      <ion-segment [(ngModel)]="selectedTab" color="primary" scrollable>
+        <!-- Pestañas solicitadas -->
+        <ion-segment-button value="miEspacio">
+          <ion-label>Mi Espacio</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="editar">
+          <ion-label>Editar</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="matricula">
+          <ion-label>Matrícula</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="clases">
+          <ion-label>Clases</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="calendario">
+          <ion-label>Calendario</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="anuncios">
+          <ion-label>Anuncios</ion-label>
+        </ion-segment-button>
+      </ion-segment>
 
-  <div class="qr-container" *ngIf="qrData">
-    <qrcode [qrdata]="qrData" [width]="200"></qrcode>
-  </div>
+      <!-- Contenido del Tab "Mi Espacio" -->
+      <div *ngIf="selectedTab === 'miEspacio'">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Mi Espacio</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Información sobre tu espacio personal.</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
 
-  <ion-text class="loading-text" *ngIf="!imagen">Cargando curso...</ion-text>
+      <!-- Contenido del Tab "Editar" -->
+      <div *ngIf="selectedTab === 'editar'">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Editar</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Opciones para editar tu perfil o preferencias.</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <!-- Contenido del Tab "Matrícula" -->
+      <div *ngIf="selectedTab === 'matricula'">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Matrícula</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Detalles sobre tu matrícula en cursos o asignaturas.</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <!-- Contenido del Tab "Clases" -->
+      <div *ngIf="selectedTab === 'clases'">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Clases</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="qr-container">
+              <ion-button (click)="generarQR()" expand="block" color="secondary">Generar QR</ion-button>
+            </div>
+    
+            <div class="qr-container" *ngIf="qrData">
+              <qrcode [qrdata]="qrData" [width]="200"></qrcode>
+            </div>
+    
+            <ion-text class="loading-text" *ngIf="!imagen">Cargando curso...</ion-text>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <!-- Contenido del Tab "Calendario" -->
+      <div *ngIf="selectedTab === 'calendario'">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Calendario</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Tu calendario de actividades y eventos importantes.</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <!-- Contenido del Tab "Anuncios" -->
+      <div *ngIf="selectedTab === 'anuncios'">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Anuncios</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Anuncios importantes relacionados con el curso o asignatura.</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+
+    </ion-col>
+  </ion-row>
 </ion-content>
