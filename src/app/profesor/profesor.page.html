@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Docente</ion-title>
+    <ion-title>Bienvenido: {{username}}</ion-title>
     <ion-buttons slot="end">
       <!-- Botón de menú de perfil -->
       <ion-menu-button></ion-menu-button>
@@ -34,9 +34,8 @@
       <ion-title size="large">Inicio</ion-title>
     </ion-toolbar>
   </ion-header>
-  <h3>Bienvenido, {{ username }}</h3>
 
-  <h2 class="header-text">Cursos</h2>
+  <h2 class="header-text" style="text-align: center;">Cursos</h2>
   
   <div class="course-container">
     <ion-card class="custom-card" *ngFor="let curso of cursos">
