@@ -41,7 +41,6 @@ export class PresenteprofeService {
 
   // Método para recuperar la contraseña
   recuperarContrasena(body: { correo: string }): Observable<any> {
-    // Cambiar la ruta a la correcta para la recuperación de contraseña
     return this.http.post(`${this.apiURL}/auth/recuperar`, body);
   }
 }
