@@ -13,6 +13,7 @@ export class ProfesorPage implements OnInit {
   submenu: boolean = false;
   usuario: string | null = null;
   cursos: any[] = [];
+  
   constructor(private router: Router, private route: ActivatedRoute, private presenteprofeService: PresenteprofeService, private navCtrl: NavController) { 
   }
 
@@ -27,6 +28,7 @@ export class ProfesorPage implements OnInit {
       console.error('No se encontró un usuario válido');
     }
   }
+
   cargarCursos() {
     this.presenteprofeService.getCursos(this.usuario!).subscribe(  
       (response) => {

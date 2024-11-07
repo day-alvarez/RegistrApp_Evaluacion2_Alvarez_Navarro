@@ -2,31 +2,15 @@
   <ion-toolbar>
     <ion-title>Bienvenido: {{username}}</ion-title>
     <ion-buttons slot="end">
-      <!-- Botón de menú de perfil -->
-      <ion-menu-button></ion-menu-button>
-      <ion-avatar (click)="openMenu()">
-        <ion-icon name="person-circle-outline" class="profile-icon"></ion-icon>
-      </ion-avatar>
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-button>
     </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 
-<!-- Menú de perfil -->
-<ion-menu side="end" contentId="main-content" id="profile-menu">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <ion-item (click)="logout()">
-        <ion-icon name="log-out-outline" slot="start"></ion-icon>
-        Cerrar Sesión
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</ion-menu>
+
 
 <ion-content [fullscreen]="true" class="content">
   <ion-header collapse="condense">
@@ -34,6 +18,7 @@
       <ion-title size="large">Inicio</ion-title>
     </ion-toolbar>
   </ion-header>
+
 
   <h2 class="header-text" style="text-align: center;">Cursos</h2>
   

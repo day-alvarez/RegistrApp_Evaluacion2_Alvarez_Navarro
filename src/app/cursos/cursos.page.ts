@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PresenteprofeService } from '../services/presenteprofe.service';
+import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-cursos',
@@ -15,7 +17,7 @@ export class CursosPage implements OnInit {
   qrData: string | null = null;
   selectedTab: string = 'curso'; // "curso" es la pestaña predeterminada
 
-  constructor(private route: ActivatedRoute, private presenteprofeService: PresenteprofeService) {}
+  constructor(private route: ActivatedRoute, private presenteprofeService: PresenteprofeService,private navCtrl: NavController) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params=>{
@@ -30,6 +32,9 @@ export class CursosPage implements OnInit {
  
     this.qrData = `QR generado el: ${new Date().toLocaleString()}`; 
     console.log('Generar QR:', this.qrData);
+  }
+  volver() {
+    this.navCtrl.back();  // Regresa a la página anterior
   }
   
   

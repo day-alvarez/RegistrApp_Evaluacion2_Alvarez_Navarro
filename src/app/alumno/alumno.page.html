@@ -2,31 +2,17 @@
   <ion-toolbar>
     <ion-title>Alumno</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="openMenu()">
-        <ion-icon name="menu"></ion-icon>
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-menu side="end" contentId="main-content" id="profile-menu">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <ion-item (click)="logout()">
-        <ion-icon name="log-out-outline" slot="start"></ion-icon>
-        Cerrar Sesión
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</ion-menu>
 
 <ion-content>
   <h2>Bienvenido, {{ username }}</h2>
+  
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="scan()">

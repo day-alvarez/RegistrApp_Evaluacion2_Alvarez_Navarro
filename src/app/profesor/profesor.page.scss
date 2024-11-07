@@ -2,23 +2,20 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 10px;
 }
 
 .custom-card {
-  width: 220px;
-  height: 300px;
+  width: 200px;
+  height: 100px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
   opacity: 88%;
-  border-radius: 10px;
 }
 
 .card-title {
-  font-size: 16px;
+  font-size: 18px;
   color: #333;
   font-weight: bold;
   text-align: center;
@@ -31,11 +28,7 @@
   text-align: center;
 }
 
-.curso-imagen {
-  width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-}
+
 
 .course-institucion {
   font-size: 12px;
@@ -46,7 +39,7 @@
 
 ion-button {
   font-size: 14px;
-  height: 40px;
+  height: 35px;
   --border-radius: 8px;
   margin-top: auto;
 }
@@ -57,8 +50,8 @@ ion-content {
 
 @media (max-width: 768px) {
   .custom-card {
-    width: 180px;
-    height: 270px;
+    width: 200px;
+    height: 300px;
   }
 
   .card-title {
