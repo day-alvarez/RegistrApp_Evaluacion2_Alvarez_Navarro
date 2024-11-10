@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Bienvenido</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-button (click)="volver()">Volver</ion-button>
+  <div class="registration-container">
+    <ion-card class="custom-card">
+      <ion-card-header>
+        <ion-card-title class="greeting-text">Registrar Curso</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-input [(ngModel)]="nombre" required label="Nombre" labelPlacement="floating" placeholder="Nombre"></ion-input>
+            <ion-note *ngIf="codigoError" color="danger">Este campo es obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-input [(ngModel)]="sigla" required label="Sigla" labelPlacement="floating" placeholder="Sigla"></ion-input>
+            <ion-note *ngIf="runError" color="danger">Este campo es obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-input [(ngModel)]="institucion" required label="Institucion" labelPlacement="floating" placeholder="Institucion"></ion-input>
+            <ion-note *ngIf="nombreError" color="danger">Este campo es obligatorio</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-input [(ngModel)]="descripcion" required label="Descripcion" labelPlacement="floating" placeholder="Descripcion"></ion-input>
+            <ion-note *ngIf="apellidoError" color="danger">Este campo es obligatorio</ion-note>
+          </ion-item>
+        </ion-list>
+
+        <ion-button expand="full" (click)="registroCurso()">Registrar Curso</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

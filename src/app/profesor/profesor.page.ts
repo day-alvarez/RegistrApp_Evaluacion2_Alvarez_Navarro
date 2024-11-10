@@ -86,6 +86,8 @@ export class ProfesorPage implements OnInit {
   }
 
  
-  
+  registCurso(){
+    this.navCtrl.navigateForward(['/registro-curso'])
+  }
   
 }

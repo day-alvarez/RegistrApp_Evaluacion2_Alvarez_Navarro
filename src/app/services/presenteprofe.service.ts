@@ -81,4 +81,10 @@ export class PresenteprofeService {
   recuperarContrasena(body: { correo: string }): Observable<any> {
     return this.http.post(`${this.apiURL}/auth/recuperar`, body);
   }
+
+  //Metodo para registrar nuevo Curso
+  async registroCurso(courseData: any):Promise<Observable<any>>{
+    const headers = await this.getAuthHeaders();
+    return this.http.post(`${this.apiURL}/cursos`, courseData, { headers })
+  }
 }

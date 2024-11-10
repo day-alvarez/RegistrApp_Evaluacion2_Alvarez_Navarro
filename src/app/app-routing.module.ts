@@ -40,6 +40,12 @@ const routes: Routes = [
     path: 'recuperar',
     loadChildren: () => import('./recuperar/recuperar.module').then( m => m.RecuperarPageModule)
   },
+  {
+    path: 'registro-curso',
+    loadChildren: () => import('./registro-curso/registro-curso.module').then( m => m.RegistroCursoPageModule),
+    canActivate: [AuthGuard]
+  },
+
   
  
 ];
