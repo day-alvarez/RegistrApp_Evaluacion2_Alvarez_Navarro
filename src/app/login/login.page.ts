@@ -28,14 +28,20 @@ export class LoginPage implements OnInit {
   }
   onLogin() {
     this.presenteprofe.login(this.username, this.password).subscribe(
-      (response) => {
+      async (response) => {
         console.log(response);
-        if (response.data.perfil == "docente") {
-          localStorage.setItem('usuario', this.username);
-          this.navCtrl.navigateForward(['/profesor'], { queryParams: { nombre: response.data.nombre } });
-        } else if (response.data.perfil == "estudiante") {
-          localStorage.setItem('usuario', this.username);
-          this.navCtrl.navigateForward(['/alumno'], { queryParams: { nombre: response.data.nombre } });
+        if (response.auth && response.auth.token) {
+          // Guardar el token de autenticación
+          await this.presenteprofe.saveToken(response.auth.token);
+          if (response.data.perfil == "docente") {
+            localStorage.setItem('usuario', this.username);
+            this.navCtrl.navigateForward(['/profesor'], { queryParams: { nombre: response.data.nombre } });
+          } else if (response.data.perfil == "estudiante") {
+            localStorage.setItem('usuario', this.username);
+            this.navCtrl.navigateForward(['/alumno'], { queryParams: { nombre: response.data.nombre } });
+          }
+          // Guardar también el perfil en el almacenamiento local por si lo necesitas más tarde
+          //await this.presenteprofe.saveUserProfile(response.data.perfil, response.data.nombre_completo);
         }
       },
       (error) => {

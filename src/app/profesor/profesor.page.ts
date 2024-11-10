@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PresenteprofeService } from '../services/presenteprofe.service';
 import { NavigationExtras } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
+
+
 @Component({
   selector: 'app-profesor',
   templateUrl: './profesor.page.html',
@@ -14,10 +17,13 @@ export class ProfesorPage implements OnInit {
   usuario: string | null = null;
   cursos: any[] = [];
   
-  constructor(private router: Router, private route: ActivatedRoute, private presenteprofeService: PresenteprofeService, private navCtrl: NavController) { 
+  constructor(private router: Router, private route: ActivatedRoute, private presenteprofeService: PresenteprofeService, private navCtrl: NavController, private alertController: AlertController) { 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const token = await this.presenteprofeService.getToken();
+    console.log('Token de autenticación:', token);
+
     this.route.queryParams.subscribe(params=>{
        this.username = params['nombre']||'No existe';
     })
@@ -28,6 +34,7 @@ export class ProfesorPage implements OnInit {
       console.error('No se encontró un usuario válido');
     }
   }
+
 
   cargarCursos() {
     this.presenteprofeService.getCursos(this.usuario!).subscribe(  

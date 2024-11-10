@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
 
@@ -18,15 +19,18 @@ const routes: Routes = [
   },
   {
     path: 'alumno',
-    loadChildren: () => import('./alumno/alumno.module').then( m => m.AlumnoPageModule)
+    loadChildren: () => import('./alumno/alumno.module').then( m => m.AlumnoPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'profesor',
-    loadChildren: () => import('./profesor/profesor.module').then( m => m.ProfesorPageModule)
+    loadChildren: () => import('./profesor/profesor.module').then( m => m.ProfesorPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'cursos',
-    loadChildren: () => import('./cursos/cursos.module').then( m => m.CursosPageModule)
+    loadChildren: () => import('./cursos/cursos.module').then( m => m.CursosPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'registro',
