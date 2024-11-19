@@ -87,4 +87,8 @@ export class PresenteprofeService {
     const headers = await this.getAuthHeaders();
     return this.http.post(`${this.apiURL}/cursos`, courseData, { headers })
   }
+  async registroClase(courseData: any, cursoId: string): Promise<Observable<any>> {
+    const headers = await this.getAuthHeaders();
+    return this.http.post(`${this.apiURL}/cursos/${cursoId}/clase`, courseData, { headers });
+  }
 }
