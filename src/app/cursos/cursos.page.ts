@@ -17,10 +17,17 @@ export class CursosPage implements OnInit {
   qrData: string | null = null;
   selectedTab: string = 'curso'; // "curso" es la pestaña predeterminada
   fecha: string = '';
+  clases: any[] = []; // Array para almacenar las clases
+  showError: boolean = false;
   hora_inicio: string = '';
   hora_termino: string = '';
   showRegistrarForm: boolean = false; // Nueva variable de estado
   claseRegistrada: any = null; // Propiedad para almacenar la clase registrada
+  nuevoAnuncio = { titulo: '', mensaje: '' };
+  showCrearAnuncioForm: boolean = false;
+
+
+  anuncios: any[] = []; // Lista de anuncios
 
   public codigoError = false;
   public runError = false;
@@ -56,7 +63,18 @@ export class CursosPage implements OnInit {
   toggleRegistrarForm() {
     this.showRegistrarForm = !this.showRegistrarForm;
   }
-
+  cargarClases() {
+    this.presenteprofeService.getClasesCurso(this.curso).subscribe(
+      (response: any) => {
+        this.clases = response.clases || [];
+        this.showError = false;
+      },
+      (error) => {
+        console.error('Error al cargar clases', error);
+        this.showError = true;
+      }
+    );
+  }
   async registroCurso() {
     this.resetErrors();
 
@@ -76,6 +94,7 @@ export class CursosPage implements OnInit {
           localStorage.setItem('claseRegistrada', JSON.stringify(this.claseRegistrada));
 
           this.showAlert('Clase Registrada', 'Clase registrada correctamente');
+          this.router.navigate(['/cursos']); 
         },
         (error: any) => {
           console.error('Error al registrar el clase', error);
@@ -119,5 +138,41 @@ export class CursosPage implements OnInit {
 
   volver() {
     this.navCtrl.back(); // Regresa a la página anterior
+  }
+  async cargarAnuncios() {
+    (await this.presenteprofeService.getAnunciosCurso(this.curso)).subscribe(
+      (response) => {
+        this.anuncios = response.anuncios || [];
+        console.log('Anuncios cargados:', this.anuncios);
+      },
+      (error) => {
+        console.error('Error al cargar anuncios:', error);
+        this.showAlert('Error', error.message || 'No se pudieron cargar los anuncios');
+      }
+    );
+  }
+
+  toggleCrearAnuncioForm() {
+    this.showCrearAnuncioForm = !this.showCrearAnuncioForm;
+  }
+
+  async crearAnuncio() {
+    if (this.nuevoAnuncio.titulo && this.nuevoAnuncio.mensaje) {
+      (await this.presenteprofeService.crearAnuncio(this.curso, this.nuevoAnuncio)).subscribe(
+        (response) => {
+          console.log('Anuncio creado:', response);
+          this.anuncios.unshift(response.anuncio);
+          this.nuevoAnuncio = { titulo: '', mensaje: '' };
+          this.showCrearAnuncioForm = false;
+          this.showAlert('Éxito', response.message || 'Anuncio creado correctamente');
+        },
+        (error) => {
+          console.error('Error al crear anuncio:', error);
+          this.showAlert('Error', error.message || 'No se pudo crear el anuncio');
+        }
+      );
+    } else {
+      this.showAlert('Error', 'Por favor, completa todos los campos.');
+    }
   }
 }

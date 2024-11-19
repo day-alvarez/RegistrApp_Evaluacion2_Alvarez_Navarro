@@ -61,6 +61,7 @@ export class RegistroCursoPage implements OnInit {
         (response:any) => {
           console.log('Curso registrado exitosamente', response);
           this.showAlert('Registro Exitoso', 'Curso registrado correctamente');
+          this.router.navigate(['/profesor']); 
 
         },
         (error: any) => {

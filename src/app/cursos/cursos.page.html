@@ -43,6 +43,7 @@
         </ion-segment-button>
       </ion-segment>
 
+      <!-- Pestaña: Clases -->
       <div *ngIf="selectedTab === 'clases'">
         <ion-card>
           <ion-card-content>
@@ -116,6 +117,50 @@
           </ion-card-content>
         </ion-card>
       </div>
+
+      <!-- Pestaña: Anuncios -->
+      <div *ngIf="selectedTab === 'anuncios'">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Anuncios del Curso</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <!-- Botón para crear anuncio -->
+            <ion-button expand="block" color="primary" (click)="toggleCrearAnuncioForm()">
+              {{ showCrearAnuncioForm ? 'Cancelar' : 'Crear Anuncio' }}
+            </ion-button>
+
+            <!-- Formulario para crear anuncio -->
+            <div *ngIf="showCrearAnuncioForm">
+              <ion-item>
+                <ion-label position="floating">Título</ion-label>
+                <ion-input [(ngModel)]="nuevoAnuncio.titulo"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Mensaje</ion-label>
+                <ion-textarea [(ngModel)]="nuevoAnuncio.mensaje"></ion-textarea>
+              </ion-item>
+              <ion-button expand="block" color="success" (click)="crearAnuncio()">Guardar Anuncio</ion-button>
+            </div>
+
+            <!-- Listado de anuncios -->
+            <ion-list>
+              <ion-item *ngFor="let anuncio of anuncios">
+                <ion-label>
+                  <h2>{{ anuncio.titulo }}</h2>
+                  <p>{{ anuncio.mensaje }}</p>
+                  <small>Publicado el: {{ anuncio.created_at | date:'medium' }}</small>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+        <div *ngIf="anuncios.length === 0">
+          <ion-text color="medium">
+            <p>No hay anuncios disponibles para este curso.</p>
+          </ion-text>
+        </div>
+      </div>
     </ion-col>
   </ion-row>
-</ion-content>
+</ion-content>  

@@ -81,7 +81,15 @@ export class PresenteprofeService {
   recuperarContrasena(body: { correo: string }): Observable<any> {
     return this.http.post(`${this.apiURL}/auth/recuperar`, body);
   }
-
+  getClasesCurso(cursoId: string): Observable<any> {
+    const url = `${this.apiURL}/cursos/${cursoId}/clase`;
+    return this.http.get<any>(url).pipe(
+      catchError((error) => {
+        console.error('Error al obtener clases:', error);
+        return throwError(() => new Error('Error al obtener clases'));
+      })
+    );
+  }
   //Metodo para registrar nuevo Curso
   async registroCurso(courseData: any):Promise<Observable<any>>{
     const headers = await this.getAuthHeaders();
@@ -91,4 +99,26 @@ export class PresenteprofeService {
     const headers = await this.getAuthHeaders();
     return this.http.post(`${this.apiURL}/cursos/${cursoId}/clase`, courseData, { headers });
   }
+  getAnunciosCurso(cursoId: string): Observable<any> {
+    const url = `${this.apiURL}/cursos/${cursoId}/anuncios`;
+    return this.http.get<any>(url).pipe(
+      catchError((error) => {
+        console.error('Error al obtener anuncios:', error);
+        return throwError(() => new Error('Error al obtener anuncios'));
+      })
+    );
+  }
+  // Método para crear un nuevo anuncio en un curso
+async crearAnuncio(cursoId: string, anuncioData: any): Promise<Observable<any>> {
+  const headers = await this.getAuthHeaders();
+  const url = `${this.apiURL}/cursos/${cursoId}/anuncios`;
+  return this.http.post(url, anuncioData, { headers }).pipe(
+    catchError((error) => {
+      console.error('Error al crear anuncio:', error);
+      return throwError(() => new Error(error.error.message || 'Error al crear anuncio'));
+    })
+  );
+}
+
+
 }
