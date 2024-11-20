@@ -26,7 +26,7 @@ export class CursosPage implements OnInit {
   nuevoAnuncio = { titulo: '', mensaje: '' };
   showCrearAnuncioForm: boolean = false;
 
-
+  codigo_Web: string ='';
   anuncios: any[] = []; // Lista de anuncios
 
   public codigoError = false;
@@ -64,7 +64,7 @@ export class CursosPage implements OnInit {
     this.showRegistrarForm = !this.showRegistrarForm;
   }
   cargarClases() {
-    this.presenteprofeService.getClasesCurso(this.curso).subscribe(
+    this.presenteprofeService.getClasesCurso(this.curso, this.codigo_Web).subscribe(
       (response: any) => {
         this.clases = response.clases || [];
         this.showError = false;
@@ -89,11 +89,13 @@ export class CursosPage implements OnInit {
         (response: any) => {
           console.log('Curso registrado exitosamente', response);
           this.claseRegistrada = response.clase; // Almacena la clase registrada
-          
+          this.codigo_Web = response.clase.codigo_web;
           // Guardar la clase registrada en localStorage
           localStorage.setItem('claseRegistrada', JSON.stringify(this.claseRegistrada));
 
           this.showAlert('Clase Registrada', 'Clase registrada correctamente');
+          console.log('Clase registrado exitosamente', response);
+          console.log('Codigo e', this.codigo_Web);
           this.router.navigate(['/cursos']); 
         },
         (error: any) => {

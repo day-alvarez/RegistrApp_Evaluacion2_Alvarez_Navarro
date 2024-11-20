@@ -81,8 +81,8 @@ export class PresenteprofeService {
   recuperarContrasena(body: { correo: string }): Observable<any> {
     return this.http.post(`${this.apiURL}/auth/recuperar`, body);
   }
-  getClasesCurso(cursoId: string): Observable<any> {
-    const url = `${this.apiURL}/cursos/${cursoId}/clase`;
+  getClasesCurso(cursoId: string, code: string): Observable<any> {
+    const url = `${this.apiURL}/cursos/${cursoId}/clase/${code}`;
     return this.http.get<any>(url).pipe(
       catchError((error) => {
         console.error('Error al obtener clases:', error);
