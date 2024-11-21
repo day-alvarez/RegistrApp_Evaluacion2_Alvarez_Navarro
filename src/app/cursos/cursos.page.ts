@@ -63,11 +63,17 @@ export class CursosPage implements OnInit {
   toggleRegistrarForm() {
     this.showRegistrarForm = !this.showRegistrarForm;
   }
+  obtenerDiaSemana(fecha: string): string {
+    const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const fechaObj = new Date(fecha);
+    return diasSemana[fechaObj.getUTCDay()];
+  }
   cargarClases() {
     this.presenteprofeService.getClasesCurso(this.curso, this.codigo_Web).subscribe(
       (response: any) => {
         this.clases = response.clases || [];
         this.showError = false;
+        
       },
       (error) => {
         console.error('Error al cargar clases', error);

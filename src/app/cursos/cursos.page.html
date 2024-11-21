@@ -79,7 +79,7 @@
           </ion-card-content>
         </ion-card>
          <!-- Mostrar la clase registrada y QR en formato tabla -->
-        <div *ngIf="claseRegistrada">
+         <div *ngIf="claseRegistrada">
           <ion-card>
             <ion-card-header>
               <ion-card-title>Clase Registrada</ion-card-title>
@@ -92,11 +92,11 @@
                 </ion-row>
                 <ion-row>
                   <ion-col size="6"><strong>Día:</strong></ion-col>
-                  <ion-col size="6">{{ claseRegistrada.dia }}</ion-col>
+                  <ion-col size="6">{{ obtenerDiaSemana(claseRegistrada.fecha) }}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col size="6"><strong>Fecha:</strong></ion-col>
-                  <ion-col size="6">{{ claseRegistrada.fecha }}</ion-col>
+                  <ion-col size="6">{{claseRegistrada.fecha | date: 'dd \'de\' MMMM, yyyy' }}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col size="6"><strong>Cantidad:</strong></ion-col>
@@ -113,10 +113,7 @@
                 </ion-row>
               </ion-grid>
             </ion-card-content>
-          </ion-card>
-
-          <!-- Mostrar QR -->
-          
+          </ion-card>    
         </div>
       </div>
      
