@@ -69,7 +69,11 @@ export class PresenteprofeService {
     const params = new HttpParams().set('user', username); 
     return this.http.get<any>(url, { params });  
   }
-
+  getCursosEstudiante(username: string): Observable<any> {
+    const url = `${this.apiURL}/estudiante/cursos`;  
+    const params = new HttpParams().set('user', username); 
+    return this.http.get<any>(url, { params });  
+  }
   // Método para obtener un curso por ID
   getCursoById(username: string, cursoId: string): Observable<any> {
     const url = `${this.apiURL}/cursos/${cursoId}`; 
@@ -119,6 +123,9 @@ async crearAnuncio(cursoId: string, anuncioData: any): Promise<Observable<any>> 
     })
   );
 }
+  async asistirClase(codigo:string): Promise<Observable<any>> { 
 
-
+    const headers = await this.getAuthHeaders();
+    return this.http.post(`${this.apiURL}/clases/${codigo}/asistencia`, codigo, { headers });
+  }
 }

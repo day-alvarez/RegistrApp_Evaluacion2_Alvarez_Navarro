@@ -18,6 +18,9 @@ export class AlumnoPage implements OnInit {
   usuario: string | null = null;
   cursos: any[] = [];
   result : string = "";
+  codigo_web : string ='';
+
+  showRegistrarForm: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private presenteprofeService: PresenteprofeService) { 
 
@@ -36,18 +39,29 @@ export class AlumnoPage implements OnInit {
     }
   }
 
-  cargarCursos() {
-    this.presenteprofeService.getCursos(this.usuario!).subscribe(
-      (response) => {
+  async cargarCursos() {
+    (await this.presenteprofeService.getCursosEstudiante(this.usuario!)).subscribe(
+      (response: any) => {
         this.cursos = response.cursos; 
         console.log(this.cursos);  
       },
-      (error) => {
+      (error: any) => {
         console.error('Error al cargar los cursos', error);
       }
     );
   }
+  async asistirClase(){
+    (await this.presenteprofeService.asistirClase(this.codigo_web)).subscribe(
+      (response:any) => {
+        console.log('Has asistido correctamente', response);
 
+      },
+      (error: any) => {
+        console.error('Error al asistir el curso', error);
+        
+      }
+    )
+  }
   async scan(): Promise<void> {
     const result = await CapacitorBarcodeScanner.scanBarcode({
       hint: CapacitorBarcodeScannerTypeHint.ALL
@@ -74,4 +88,8 @@ export class AlumnoPage implements OnInit {
     this.router.navigate(['/login']); 
   }
   
+
+  toggleRegistrarForm() {
+    this.showRegistrarForm = !this.showRegistrarForm;
+  }
 }

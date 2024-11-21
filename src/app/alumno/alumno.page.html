@@ -12,8 +12,39 @@
 
 <ion-content>
   <h2>Bienvenido, {{ username }}</h2>
-  
+  <h3>Matricularse a un curso</h3>
+  <ion-card-content>
+    <!-- Botón para mostrar los campos de registro -->
+    <ion-button expand="block" color="primary" (click)="toggleRegistrarForm()">
+      {{ showRegistrarForm ? 'Cancelar Registro' : 'Registrar Clase' }}
+    </ion-button>
+    <div *ngIf="showRegistrarForm">
+      <ion-list>
+        <ion-item>
+          <ion-input [(ngModel)]="codigo_web" required label="Codigo" labelPlacement="floating" placeholder="Codigo"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="full" (click)="asistirClase()">Matricula</ion-button>
+    </div>
+  </ion-card-content>
 
+  <!--Cursos-->
+  <div class="course-container">
+    <ion-card class="custom-card" *ngFor="let curso of cursos">
+      
+      <ion-card-header>
+        <ion-card-title class="card-title">{{ curso.nombre }}</ion-card-title>
+        
+        <img src="{{ curso.imagen }}" alt="{{ curso.nombre }}" class="curso-imagen">
+        <p class="course-institucion">{{ curso.descripcion }}</p>
+        <!-- <p class="course-sigla">{{ curso.seccion }}</p>
+        <p class="course-sigla">{{ curso.docente }}</p> -->
+        <button>Historial</button>
+        <button>Reportar Inasistencia</button>
+      </ion-card-header>
+    </ion-card>
+  </div>
+  <!--Scanner-->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="scan()">
       <ion-icon name="scan"></ion-icon>
