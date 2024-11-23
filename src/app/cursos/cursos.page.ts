@@ -57,6 +57,12 @@ export class CursosPage implements OnInit {
       if (storedClass) {
         this.claseRegistrada = JSON.parse(storedClass);
       }
+
+      // Cargar las clases solo para el curso actual
+      const clasesGuardadas = JSON.parse(localStorage.getItem(`clasesRegistradas_${this.curso}`) || '[]');
+      this.clases = clasesGuardadas;
+
+      console.log('Clases cargadas para el curso:', this.clases); // Verifica si las clases se cargan correctamente
     });
   }
 
@@ -96,8 +102,14 @@ export class CursosPage implements OnInit {
           console.log('Curso registrado exitosamente', response);
           this.claseRegistrada = response.clase; // Almacena la clase registrada
           this.codigo_Web = response.clase.codigo_web;
-          // Guardar la clase registrada en localStorage
-          localStorage.setItem('claseRegistrada', JSON.stringify(this.claseRegistrada));
+          // Obtener las clases guardadas para el curso actual (usando una clave única)
+          let clasesGuardadas = JSON.parse(localStorage.getItem(`clasesRegistradas_${this.curso}`) || '[]');
+
+          // Agregar la nueva clase al arreglo de clases
+          clasesGuardadas.push(this.claseRegistrada);
+
+          // Guardar las clases nuevamente en localStorage bajo la clave del curso
+          localStorage.setItem(`clasesRegistradas_${this.curso}`, JSON.stringify(clasesGuardadas));
 
           this.showAlert('Clase Registrada', 'Clase registrada correctamente');
           console.log('Clase registrado exitosamente', response);
@@ -135,11 +147,7 @@ export class CursosPage implements OnInit {
   generarQR() {
     if (this.claseRegistrada) {
       // Generar QR con la información de la clase registrada
-      this.qrData = `Clase: ${this.claseRegistrada.curso}
-                      Día: ${this.claseRegistrada.dia}
-                      Fecha: ${this.claseRegistrada.fecha}
-                      Hora Inicio: ${this.claseRegistrada.hora_inicio}
-                      Hora Término: ${this.claseRegistrada.hora_termino}`;
+      this.qrData = `${this.claseRegistrada.codigo_web}`;
       console.log('Generar QR:', this.qrData);
     }
   }
