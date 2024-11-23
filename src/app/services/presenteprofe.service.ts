@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError} from 'rxjs';
+import { Observable, throwError, BehaviorSubject} from 'rxjs';
 import { Storage } from '@ionic/storage-angular';
 import { tap, catchError } from 'rxjs/operators';
 
@@ -9,6 +9,9 @@ import { tap, catchError } from 'rxjs/operators';
 })
 export class PresenteprofeService {
   private apiURL = 'https://www.presenteprofe.cl/api/v1';  
+
+  private cursosSubject = new BehaviorSubject<any[]>([]);
+  cursos$ = this.cursosSubject.asObservable(); // Observable para que los componentes se suscriban
 
   constructor(private http: HttpClient, private storage: Storage) {
     this.storage.create();
@@ -63,11 +66,16 @@ export class PresenteprofeService {
     return this.http.post(`${this.apiURL}/usuarios`, userData); 
   }
 
-  // Método para obtener cursos del usuario
+  // Método para obtener cursos del usuario y actualizar el estado
   getCursos(username: string): Observable<any> {
     const url = `${this.apiURL}/cursos`;  
     const params = new HttpParams().set('user', username); 
-    return this.http.get<any>(url, { params });  
+    return this.http.get<any>(url, { params }).pipe(
+      tap(response => {
+        // Actualizamos el BehaviorSubject con la nueva lista de cursos
+        this.cursosSubject.next(response.cursos); 
+      })
+    );
   }
   getCursosEstudiante(username: string): Observable<any> {
     const url = `${this.apiURL}/estudiante/cursos`;  
@@ -95,9 +103,15 @@ export class PresenteprofeService {
     );
   }
   //Metodo para registrar nuevo Curso
-  async registroCurso(courseData: any):Promise<Observable<any>>{
+  async registroCurso(courseData: any): Promise<Observable<any>> {
     const headers = await this.getAuthHeaders();
-    return this.http.post(`${this.apiURL}/cursos`, courseData, { headers })
+    return this.http.post(`${this.apiURL}/cursos`, courseData, { headers }).pipe(
+      // Una vez registrado el curso, se actualizan los cursos del servidor
+      tap(() => {
+        // Llamamos a getCursos para refrescar la lista de cursos después de registrar uno nuevo
+        this.getCursos(localStorage.getItem('usuario')!).subscribe(); // O puedes pasar el username de alguna otra forma
+      })
+    );
   }
   async registroClase(courseData: any, cursoId: string): Promise<Observable<any>> {
     const headers = await this.getAuthHeaders();

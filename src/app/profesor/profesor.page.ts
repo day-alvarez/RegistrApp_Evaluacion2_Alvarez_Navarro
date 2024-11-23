@@ -29,10 +29,24 @@ export class ProfesorPage implements OnInit {
     })
     this.usuario = localStorage.getItem('usuario'); 
     if (this.usuario) {
-      this.cargarCursos();  
+      // Nos suscribimos al observable para que se actualice cuando los cursos cambien
+      this.presenteprofeService.getCursos(this.usuario!).subscribe(
+        (response) => {
+          this.cursos = response.cursos;  
+          console.log(this.cursos);  
+        },
+        (error) => {
+          console.error('Error al cargar los cursos', error);
+        }
+      );
     } else {
       console.error('No se encontró un usuario válido');
     }
+
+    // Aquí nos suscribimos al BehaviorSubject para obtener los cursos
+    this.presenteprofeService.cursos$.subscribe(cursos => {
+      this.cursos = cursos;
+    });
   }
 
 
