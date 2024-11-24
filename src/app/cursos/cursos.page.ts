@@ -11,19 +11,24 @@ import { ModalController, AlertController } from '@ionic/angular';
 })
 export class CursosPage implements OnInit {
   curso: string = '';
+  mostrarBotonQR: boolean = true; // Variable de estado para el botón
+
   nombre: string = '';
   imagen: string = '';
   selectedSegment: string = 'mi-espacio';
   qrData: string | null = null;
   selectedTab: string = 'curso'; // "curso" es la pestaña predeterminada
   fecha: string = '';
+  titulo: string='';
+  mensaje: string='';
   clases: any[] = []; // Array para almacenar las clases
   showError: boolean = false;
   hora_inicio: string = '';
   hora_termino: string = '';
   showRegistrarForm: boolean = false; // Nueva variable de estado
   claseRegistrada: any = null; // Propiedad para almacenar la clase registrada
-  nuevoAnuncio = { titulo: '', mensaje: '' };
+  anuncioregistrado: any = null
+
   showCrearAnuncioForm: boolean = false;
 
   codigo_Web: string ='';
@@ -51,20 +56,46 @@ export class CursosPage implements OnInit {
       this.imagen = params['imagen'] || 'Sin imagen';
       console.log(this.curso);
       console.log(this.nombre);
-
+  
       // Verificar si ya existe la clase registrada en localStorage
       const storedClass = localStorage.getItem('claseRegistrada');
       if (storedClass) {
-        this.claseRegistrada = JSON.parse(storedClass);
+        try {
+          this.claseRegistrada = JSON.parse(storedClass);
+        } catch (error) {
+          console.error('Error al parsear clase registrada:', error);
+        }
       }
-
+  
       // Cargar las clases solo para el curso actual
-      const clasesGuardadas = JSON.parse(localStorage.getItem(`clasesRegistradas_${this.curso}`) || '[]');
-      this.clases = clasesGuardadas;
-
-      console.log('Clases cargadas para el curso:', this.clases); // Verifica si las clases se cargan correctamente
+      const clasesGuardadas = localStorage.getItem(`clasesRegistradas_${this.curso}`);
+      if (clasesGuardadas) {
+        try {
+          this.clases = JSON.parse(clasesGuardadas);
+          console.log('Clases cargadas para el curso:', this.clases);
+        } catch (error) {
+          console.error('Error al parsear las clases:', error);
+        }
+      }
+  
+      // Cargar los anuncios solo para el curso actual
+      const anunciosGuardados = localStorage.getItem(`anuncioregistrado_${this.curso}`);
+  
+      // Verificar si existe un valor válido en 'anuncioregistrado_${this.curso}'
+      if (anunciosGuardados && anunciosGuardados !== 'undefined' && anunciosGuardados !== 'null' && anunciosGuardados.trim() !== '') {
+        try {
+          this.anuncios = JSON.parse(anunciosGuardados);
+          console.log('Anuncios cargados para el curso:', this.anuncios);
+        } catch (error) {
+          console.error('Error al parsear los anuncios:', error);
+        }
+      } else {
+        console.log('No se encontraron anuncios para el curso:', this.curso);
+      }
     });
   }
+  
+  
 
   toggleRegistrarForm() {
     this.showRegistrarForm = !this.showRegistrarForm;
@@ -87,37 +118,43 @@ export class CursosPage implements OnInit {
       }
     );
   }
-  async registroCurso() {
-    this.resetErrors();
-
+  cargarAnuncios() {
+    // Intentar cargar anuncios desde el servidor
+    this.presenteprofeService.getAnunciosCurso(this.curso).subscribe(
+      (response: any) => {
+        this.anuncios = response.anuncios || [];
+        this.showError = false;
+      },
+      (error: any) => {
+        console.error('Error al cargar anuncios:', error);
+        this.showError = true;
+      }
+    );
+  }
+  async crearClase() {
     if (this.fecha && this.hora_inicio && this.hora_termino) {
-      const courseData = {
+      const nuevaClase = {
         fecha: this.fecha,
         hora_inicio: this.hora_inicio,
-        hora_termino: this.hora_termino,
+        hora_termino: this.hora_termino
       };
 
-      (await this.presenteprofeService.registroClase(courseData, this.curso)).subscribe(
+      // Enviar la nueva clase al servidor
+      (await this.presenteprofeService.registroClase(nuevaClase, this.curso)).subscribe(
         (response: any) => {
-          console.log('Curso registrado exitosamente', response);
-          this.claseRegistrada = response.clase; // Almacena la clase registrada
-          this.codigo_Web = response.clase.codigo_web;
-          // Obtener las clases guardadas para el curso actual (usando una clave única)
+          console.log('Clase creada exitosamente:', response);
+          this.claseRegistrada = response.clase;
+          this.showAlert('Éxito', 'Clase creada correctamente.');
+
+          // Almacenar la clase en el localStorage
           let clasesGuardadas = JSON.parse(localStorage.getItem(`clasesRegistradas_${this.curso}`) || '[]');
-
-          // Agregar la nueva clase al arreglo de clases
           clasesGuardadas.push(this.claseRegistrada);
-
-          // Guardar las clases nuevamente en localStorage bajo la clave del curso
           localStorage.setItem(`clasesRegistradas_${this.curso}`, JSON.stringify(clasesGuardadas));
 
-          this.showAlert('Clase Registrada', 'Clase registrada correctamente');
-          console.log('Clase registrado exitosamente', response);
-          console.log('Codigo e', this.codigo_Web);
-          this.router.navigate(['/cursos']); 
+          // Opcionalmente, podrías actualizar la lista de clases mostrada.
         },
-        (error: any) => {
-          console.error('Error al registrar el clase', error);
+        (error) => {
+          console.error('Error al crear clase:', error);
           this.showAlert('Error', `Error ${error.status}: ${error.error.message || 'Error desconocido'}`);
         }
       );
@@ -125,6 +162,64 @@ export class CursosPage implements OnInit {
       this.showAlert('Error', 'Por favor, completa todos los campos.');
     }
   }
+
+  async crearAnuncio() {
+    this.resetErrors();
+    if (this.titulo && this.mensaje) {
+      const nuevoAnuncioData = {
+        titulo: this.titulo,
+        mensaje: this.mensaje,
+      };
+  
+      // Enviar el nuevo anuncio al servidor
+      (await this.presenteprofeService.crearAnuncio(this.curso, nuevoAnuncioData)).subscribe(
+        (response: any) => {
+          console.log('Anuncio creado exitosamente:', response);
+          
+          // Verificar si la respuesta contiene el anuncio
+          if (response && response.anuncio) {
+            this.anuncioregistrado = response.anuncio;
+  
+            // Obtener los anuncios guardados de manera segura desde localStorage
+            let anunciosGuardados = [];
+            const anunciosFromStorage = localStorage.getItem(`anuncioregistrado_${this.curso}`);
+  
+            // Solo intentar parsear si el valor no es null ni undefined
+            if (anunciosFromStorage && anunciosFromStorage !== 'undefined' && anunciosFromStorage !== 'null' && anunciosFromStorage.trim() !== '') {
+              try {
+                anunciosGuardados = JSON.parse(anunciosFromStorage);
+              } catch (error) {
+                console.error('Error al parsear los anuncios desde localStorage:', error);
+              }
+            }
+  
+            // Agregar el nuevo anuncio
+            anunciosGuardados.push(this.anuncioregistrado);
+  
+            // Guardar la lista actualizada en localStorage
+            localStorage.setItem(`anuncioregistrado_${this.curso}`, JSON.stringify(anunciosGuardados));
+  
+            // Actualizar la lista de anuncios en la vista
+            this.anuncios = anunciosGuardados;
+  
+            // Resetear el formulario y mostrar éxito
+            this.showAlert('Éxito', response.message || 'Anuncio creado correctamente');
+          } else {
+            console.error('Respuesta del servidor no válida');
+            this.showAlert('Error', 'Respuesta del servidor no válida');
+          }
+        },
+        (error: any) => {
+          console.error('Error al crear anuncio:', error);
+          this.showAlert('Error', error.message || 'No se pudo crear el anuncio');
+        }
+      );
+    } else {
+      this.showAlert('Error', 'Por favor, completa todos los campos.');
+    }
+  }
+  
+  
 
   async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({
@@ -144,51 +239,33 @@ export class CursosPage implements OnInit {
     this.perfilError = false;
   }
 
-  generarQR() {
-    if (this.claseRegistrada) {
-      // Generar QR con la información de la clase registrada
-      this.qrData = `${this.claseRegistrada.codigo_web}`;
-      console.log('Generar QR:', this.qrData);
+  generarQR(clase: any) {
+    if (clase && clase.codigo_web) {
+      // Si el QR ya está visible, lo ocultamos, de lo contrario, lo mostramos
+      clase.mostrarQR = !clase.mostrarQR;
+      if (!clase.mostrarQR) {
+        clase.qrData = null; // Eliminar QR si lo estamos ocultando
+      } else {
+        clase.qrData = clase.codigo_web; // Generar el QR
+      }
+      console.log('Generar QR para la clase:', clase.codigo_web);
+    } else {
+      console.error('No se puede generar el QR: Clase o código_web no está disponible.');
+      clase.qrData = null;
     }
   }
 
+  
+  
   volver() {
     this.navCtrl.back(); // Regresa a la página anterior
   }
-  async cargarAnuncios() {
-    (await this.presenteprofeService.getAnunciosCurso(this.curso)).subscribe(
-      (response) => {
-        this.anuncios = response.anuncios || [];
-        console.log('Anuncios cargados:', this.anuncios);
-      },
-      (error) => {
-        console.error('Error al cargar anuncios:', error);
-        this.showAlert('Error', error.message || 'No se pudieron cargar los anuncios');
-      }
-    );
-  }
 
+
+
+  
   toggleCrearAnuncioForm() {
     this.showCrearAnuncioForm = !this.showCrearAnuncioForm;
   }
-
-  async crearAnuncio() {
-    if (this.nuevoAnuncio.titulo && this.nuevoAnuncio.mensaje) {
-      (await this.presenteprofeService.crearAnuncio(this.curso, this.nuevoAnuncio)).subscribe(
-        (response) => {
-          console.log('Anuncio creado:', response);
-          this.anuncios.unshift(response.anuncio);
-          this.nuevoAnuncio = { titulo: '', mensaje: '' };
-          this.showCrearAnuncioForm = false;
-          this.showAlert('Éxito', response.message || 'Anuncio creado correctamente');
-        },
-        (error) => {
-          console.error('Error al crear anuncio:', error);
-          this.showAlert('Error', error.message || 'No se pudo crear el anuncio');
-        }
-      );
-    } else {
-      this.showAlert('Error', 'Por favor, completa todos los campos.');
-    }
-  }
+  
 }
