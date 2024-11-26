@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Detalle del Curso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  
+  <ion-content>
+    <div *ngIf="codigo_web">
+      <p><strong>Código Web:</strong> {{ codigo_web }}</p>
+    </div>
+  
+    <div *ngIf="totalAsistencias !== undefined">
+      <p><strong>Cantidad de Estudiantes Matriculados:</strong> {{ totalAsistencias }}</p>
+    </div>
+  
+    <!-- Agregar más detalles aquí si es necesario -->
+  
+  </ion-content>
+</ion-content>

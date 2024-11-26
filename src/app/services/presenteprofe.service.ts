@@ -159,4 +159,14 @@ async crearAnuncio(cursoId: string, anuncioData: any): Promise<Observable<any>> 
       })
     );
   }
+  async obtenerHistorialAsistencia(cursoId: string, code: string): Promise<Observable<any>> {
+    const headers = await this.getAuthHeaders(); // Asegúrate de que este método devuelva los encabezados correctos con el token de autorización
+    const url = `${this.apiURL}/cursos/${cursoId}/clase/${code}`;
+    return this.http.get<any>(url, { headers }).pipe(
+      catchError((error) => {
+        console.error('Error al obtener el historial de asistencia:', error);
+        return throwError(() => new Error('Failed to fetch attendance history'));
+      })
+    );
+  }
 }

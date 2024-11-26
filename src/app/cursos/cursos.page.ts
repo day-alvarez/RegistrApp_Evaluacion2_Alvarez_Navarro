@@ -267,5 +267,16 @@ export class CursosPage implements OnInit {
   toggleCrearAnuncioForm() {
     this.showCrearAnuncioForm = !this.showCrearAnuncioForm;
   }
-  
+  verDetalleClase(curso: string, clase: any) {
+    if (curso && clase.codigo_web) {
+      this.router.navigate(['/detalle-curso'], {
+        queryParams: {
+          curso: this.curso,
+          codigo_web: clase.codigo_web // Asegúrate de usar el mismo nombre que espera el componente destino
+        }
+      });
+    } else {
+      console.error('Clase o código_web no válido:', clase);
+    }
+  }
 }
