@@ -138,20 +138,44 @@ export class CursosPage implements OnInit {
         hora_inicio: this.hora_inicio,
         hora_termino: this.hora_termino
       };
-
+  
       // Enviar la nueva clase al servidor
       (await this.presenteprofeService.registroClase(nuevaClase, this.curso)).subscribe(
         (response: any) => {
           console.log('Clase creada exitosamente:', response);
-          this.claseRegistrada = response.clase;
-          this.showAlert('Éxito', 'Clase creada correctamente.');
-
-          // Almacenar la clase en el localStorage
-          let clasesGuardadas = JSON.parse(localStorage.getItem(`clasesRegistradas_${this.curso}`) || '[]');
-          clasesGuardadas.push(this.claseRegistrada);
-          localStorage.setItem(`clasesRegistradas_${this.curso}`, JSON.stringify(clasesGuardadas));
-
-          // Opcionalmente, podrías actualizar la lista de clases mostrada.
+  
+          // Verificar si la respuesta contiene la clase
+          if (response && response.clase) {
+            this.claseRegistrada = response.clase;
+  
+            // Obtener las clases guardadas de manera segura desde localStorage
+            let clasesGuardadas = [];
+            const clasesFromStorage = localStorage.getItem(`clasesRegistradas_${this.curso}`);
+  
+            // Solo intentar parsear si el valor no es null ni undefined
+            if (clasesFromStorage && clasesFromStorage !== 'undefined' && clasesFromStorage !== 'null' && clasesFromStorage.trim() !== '') {
+              try {
+                clasesGuardadas = JSON.parse(clasesFromStorage);
+              } catch (error) {
+                console.error('Error al parsear las clases desde localStorage:', error);
+              }
+            }
+  
+            // Agregar la nueva clase
+            clasesGuardadas.push(this.claseRegistrada);
+  
+            // Guardar la lista actualizada en localStorage
+            localStorage.setItem(`clasesRegistradas_${this.curso}`, JSON.stringify(clasesGuardadas));
+  
+            // Actualizar la lista de clases en la vista
+            this.clases = clasesGuardadas;
+  
+            // Resetear el formulario y mostrar éxito
+            this.showAlert('Éxito', 'Clase creada correctamente.');
+          } else {
+            console.error('Respuesta del servidor no válida');
+            this.showAlert('Error', 'Respuesta del servidor no válida');
+          }
         },
         (error) => {
           console.error('Error al crear clase:', error);
@@ -162,6 +186,7 @@ export class CursosPage implements OnInit {
       this.showAlert('Error', 'Por favor, completa todos los campos.');
     }
   }
+  
 
   async crearAnuncio() {
     this.resetErrors();

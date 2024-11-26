@@ -36,7 +36,7 @@
         <ion-card>
           <ion-card-content>
             <!-- Botón para mostrar los campos de registro -->
-            <ion-button expand="block" color="primary" (click)="toggleRegistrarForm()">
+            <ion-button expand="block" color="secondary" (click)="toggleRegistrarForm()">
               {{ showRegistrarForm ? 'Cancelar Registro' : 'Registrar Clase' }}
             </ion-button>
 
@@ -72,7 +72,6 @@
               <th>#</th>
               <th>Dia</th>
               <th>Fecha</th>
-              <th>Cantidad</th>
               <th></th>
             </tr>
           </thead>
@@ -80,7 +79,7 @@
             <!-- Iterar sobre el arreglo de clasesRegistradas -->
             <tr *ngFor="let clase of clases">
               <th><ion-col size="6">{{ clase.codigo_web }}</ion-col></th>
-              <th><ion-col size="6">{{ clase.dia }}</ion-col></th>
+              <th><ion-col size="6">{{ obtenerDiaSemana(clase.fecha) }}</ion-col></th>
               <th><ion-col size="6">{{ clase.fecha }}</ion-col></th>
               <ion-button xpand="block" color="secondary" (click)="verDetalleClase(curso, clase)">Detalle</ion-button>
               <ion-button *ngIf="mostrarBotonQR" expand="block" color="secondary" (click)="generarQR(clase)">
@@ -103,7 +102,7 @@
           </ion-card-header>
           <ion-card-content>
             <!-- Botón para mostrar/ocultar formulario de creación -->
-            <ion-button expand="block" color="primary" (click)="toggleCrearAnuncioForm()">
+            <ion-button expand="block" color="secondary" (click)="toggleCrearAnuncioForm()">
               {{ showCrearAnuncioForm ? 'Cancelar' : 'Crear Anuncio' }}
             </ion-button>
       

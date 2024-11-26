@@ -1,22 +1,28 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
     <ion-title>Detalle del Curso</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-
-  
-  <ion-content>
-    <div *ngIf="codigo_web">
-      <p><strong>Código Web:</strong> {{ codigo_web }}</p>
-    </div>
-  
-    <div *ngIf="totalAsistencias !== undefined">
-      <p><strong>Cantidad de Estudiantes Matriculados:</strong> {{ totalAsistencias }}</p>
-    </div>
-  
-    <!-- Agregar más detalles aquí si es necesario -->
-  
-  </ion-content>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="course-detail-card">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Información del Curso</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div *ngIf="codigo_web" class="detail-item">
+          <ion-icon name="code-outline" class="detail-icon"></ion-icon>
+          <p><strong>Código Web:</strong> {{ codigo_web }}</p>
+        </div>
+        <div *ngIf="totalAsistencias !== undefined" class="detail-item">
+          <ion-icon name="people-outline" class="detail-icon"></ion-icon>
+          <p><strong>Estudiantes Matriculados:</strong> {{ totalAsistencias }}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

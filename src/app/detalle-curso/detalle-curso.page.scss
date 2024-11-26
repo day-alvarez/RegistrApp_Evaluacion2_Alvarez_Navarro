@@ -1,0 +1,16 @@
+
+ion-content {
+    --background: url('https://media.istockphoto.com/id/1353473723/es/foto/fondo-abstracto-de-movimiento-borroso-desenfocado-amarillo-y-naranja-soleado.jpg?s=612x612&w=0&k=20&c=szFbBBCrxvfx9E0AGDVBOP6F4gRSH6zliCQcKPxJKrE=') no-repeat center center / cover;
+    --padding-top: 20px;
+  }
+  .detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  
+  .detail-icon {
+    margin-right: 10px;
+    font-size: 1.5rem;
+    color: var(--ion-color-primary);
+  }
