@@ -16,6 +16,17 @@ En tu terminal debes ejecutar esto para instalar dependencias:
 ```bash
 npm install
 ```
+Construcción de la aplicación (crea carpera www):
+```bash
+ionic build --prod
+```
+Sincronizar la aplicación con el proyecto de android:
+```bash
+ionic capacitor sync android
+```
 Para ejecutarlo en Android Studio: (para el scanner)
 ```bash
-ionic cap open android
+npx cap open android
+```
+Construir APK, en Android Studio:
+- Menu: Build -> Build Bundle(s) / APK(s) -> Build APK(s)
