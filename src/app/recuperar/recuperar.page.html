@@ -5,9 +5,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="recovery-content">
+  <ion-button color="medium" fill="clear" (click)="volver()">
+    <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+  </ion-button>
   <div class="recovery-container">
     <h1 class="greeting-text">Recuperar Contraseña</h1>
-
+  
     <ion-list>
       <ion-item>
         <ion-input

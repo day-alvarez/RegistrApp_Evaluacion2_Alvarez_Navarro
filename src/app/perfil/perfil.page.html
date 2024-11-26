@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Perfil del Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button color="medium" fill="clear" (click)="volver()">
+    <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+  </ion-button>
+  <ion-card *ngIf="userData">
+    <ion-card-header>
+      <ion-card-title>{{ userData.nombre_completo || 'Nombre no disponible' }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Perfil:</strong> {{ userData.perfil || 'No especificado' }}</p>
+      <p><strong>Correo:</strong> {{ userData.correo || 'No especificado' }}</p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

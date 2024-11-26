@@ -48,7 +48,15 @@ export class ProfesorPage implements OnInit {
       this.cursos = cursos;
     });
   }
-
+  miperfil() {
+    this.navCtrl.navigateForward('/perfil', {
+      queryParams: {
+        username: this.username, // Pasar el nombre del usuario si es necesario
+        user_id: localStorage.getItem('user_id'), // Opcional: pasa el ID del usuario si es necesario
+      },
+    });
+  }
+  
 
   cargarCursos() {
     this.presenteprofeService.getCursos(this.usuario!).subscribe(  

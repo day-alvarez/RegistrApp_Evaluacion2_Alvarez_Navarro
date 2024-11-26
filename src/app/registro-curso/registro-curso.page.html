@@ -11,8 +11,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-button (click)="volver()">Volver</ion-button>
-  <div class="registration-container">
+  <ion-button color="medium" fill="clear" (click)="volver()">
+    <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+  </ion-button>  <div class="registration-container">
     <ion-card class="custom-card">
       <ion-card-header>
         <ion-card-title class="greeting-text">Registrar Curso</ion-card-title>

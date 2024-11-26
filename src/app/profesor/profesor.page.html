@@ -1,12 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Bienvenido: {{username}}</ion-title>
+    <ion-title>Bienvenido: {{ username }}</ion-title>
     <ion-buttons slot="end">
+      <!-- Botón de "Mi Perfil" -->
+      <ion-button (click)="miperfil()">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-button>
+
+      <!-- Botón de Logout -->
       <ion-button (click)="logout()">
         <ion-icon name="log-out"></ion-icon>
       </ion-button>
     </ion-buttons>
-    
   </ion-toolbar>
 </ion-header>
 

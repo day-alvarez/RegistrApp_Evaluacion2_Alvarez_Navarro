@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PresenteprofeService } from '../services/presenteprofe.service'; // Asegúrate de que la ruta sea correcta
 import { AlertController } from '@ionic/angular'; // Importar el controlador de alertas
+import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-registro',
@@ -27,7 +29,8 @@ export class RegistroPage {
   constructor(
     private presenteprofe: PresenteprofeService, 
     private router: Router, 
-    private alertController: AlertController 
+    private alertController: AlertController ,
+    private navCtrl: NavController
   ) {
     this.codigo = '';
     this.run = '';
@@ -91,4 +94,8 @@ export class RegistroPage {
     this.correoError = false;
     this.perfilError = false;
   }
+  volver() {
+    this.navCtrl.back(); 
+  }
+
 }

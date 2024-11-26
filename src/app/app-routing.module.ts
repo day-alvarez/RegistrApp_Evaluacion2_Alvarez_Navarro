@@ -44,7 +44,11 @@ const routes: Routes = [
     path: 'registro-curso',
     loadChildren: () => import('./registro-curso/registro-curso.module').then( m => m.RegistroCursoPageModule),
     canActivate: [AuthGuard]
+  },  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+
 
   
  

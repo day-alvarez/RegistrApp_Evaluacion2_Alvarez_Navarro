@@ -142,4 +142,21 @@ async crearAnuncio(cursoId: string, anuncioData: any): Promise<Observable<any>> 
     const headers = await this.getAuthHeaders();
     return this.http.post(`${this.apiURL}/clases/${codigo}/asistencia`, codigo, { headers });
   }
+  public async getperfilusuario(): Promise<Observable<any>> {
+    const token = await this.getToken();
+    if (!token) {
+      throw new Error('No authenticated');
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+    const url = `${this.apiURL}/auth/me`;
+    return this.http.get<any>(url, { headers }).pipe(
+      catchError((error) => {
+        console.error('Error al obtener el perfil del usuario:', error);
+        return throwError(() => new Error('Error al obtener perfil'));
+      })
+    );
+  }
 }

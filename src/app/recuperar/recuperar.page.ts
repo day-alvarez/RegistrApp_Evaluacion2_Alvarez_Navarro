@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { PresenteprofeService } from '../services/presenteprofe.service'; 
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-recuperar',
@@ -14,7 +16,8 @@ export class RecuperarPage {
   constructor(
     private presenteprofe: PresenteprofeService,
     private alertController: AlertController,
-    private router: Router 
+    private router: Router,
+    private navCtrl: NavController
   ) {}
 
   recuperarContrasena() {
@@ -38,7 +41,9 @@ export class RecuperarPage {
       }
     );
   }
-
+  volver() {
+    this.navCtrl.back(); 
+  }
   async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header,
