@@ -142,7 +142,7 @@ async crearAnuncio(cursoId: string, anuncioData: any): Promise<Observable<any>> 
     const headers = await this.getAuthHeaders();
     return this.http.post(`${this.apiURL}/clases/${codigo}/asistencia`, codigo, { headers });
   }
-  public async getperfilusuario(): Promise<Observable<any>> {
+  async getperfilusuario(): Promise<Observable<any>> {
     const token = await this.getToken();
     if (!token) {
       throw new Error('No authenticated');
