@@ -94,7 +94,6 @@
               <th><ion-col size="6">{{ clase.codigo_web }}</ion-col></th>
               <th><ion-col size="6">{{ clase.dia }}</ion-col></th>
               <th><ion-col size="6">{{ clase.fecha }}</ion-col></th>
-              <th><ion-col size="6">{{ clase.cantidad }}</ion-col></th>
               <ion-button xpand="block" color="secondary" (click)="verDetalleClase(curso, clase)">Detalle</ion-button>
               <ion-button *ngIf="mostrarBotonQR" expand="block" color="secondary" (click)="generarQR(clase)">
                 <ion-icon name="qr-code" slot="start"></ion-icon>
