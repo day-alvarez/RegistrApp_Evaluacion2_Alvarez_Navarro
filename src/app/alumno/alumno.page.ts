@@ -4,6 +4,7 @@ import { PresenteprofeService } from '../services/presenteprofe.service';
 import { NavController } from '@ionic/angular';
 import { CapacitorBarcodeScanner, CapacitorBarcodeScannerTypeHint } from '@capacitor/barcode-scanner';
 import { ModalController, AlertController } from '@ionic/angular';
+import {QrScannerService} from "../services/qr-scanner.service"; 
 
 @Component({
   selector: 'app-alumno',
@@ -28,7 +29,8 @@ export class AlumnoPage implements OnInit {
     private navCtrl: NavController,
     private route: ActivatedRoute,
     private presenteprofeService: PresenteprofeService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private readonly qrScannerService: QrScannerService,
 
   ) {}
 
@@ -97,13 +99,12 @@ export class AlumnoPage implements OnInit {
     await alert.present();
   }
 
-  
-  async scan(): Promise<void> {
-    const result = await CapacitorBarcodeScanner.scanBarcode({
-      hint: CapacitorBarcodeScannerTypeHint.ALL,
-    });
-    this.result = result.ScanResult || 'Sin resultado';
-  }
+
+    async scan(): Promise<void> {
+      const barcodes = await this.qrScannerService.scan() //esto abre la camara para escanear
+      console.log(barcodes)
+      //aqui el codigo de logica con los qrs escaneados
+    }
 
   verHistorial(cursoId: string) {
     console.log(`Ver historial del curso con ID: ${cursoId}`);
