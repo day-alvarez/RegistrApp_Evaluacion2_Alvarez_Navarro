@@ -100,11 +100,38 @@ export class AlumnoPage implements OnInit {
   }
 
 
-    async scan(): Promise<void> {
-      const barcodes = await this.qrScannerService.scan() //esto abre la camara para escanear
-      console.log(barcodes)
-      //aqui el codigo de logica con los qrs escaneados
+  async scan(): Promise<void> {
+    this.mensajeError = ''; 
+    this.mensajeExitoso = '';
+  
+    try {
+      const barcodes: string[] = await this.qrScannerService.scan(); 
+      console.log('Códigos QR escaneados:', barcodes);
+  
+      const codigoWeb = barcodes[0];
+      if (!codigoWeb) {
+        throw new Error('No se pudo obtener un código válido del QR.');
+      }
+  
+      (await this.presenteprofeService.asistirClase(codigoWeb)).subscribe(
+        async (response: any) => {
+          console.log('Has asistido correctamente', response);
+          this.registroExitoso = true;
+          this.mensajeExitoso = 'Registro exitoso';
+          await this.showAlert('Éxito', 'Te has registrado correctamente en el curso.');
+        },
+        async (error: any) => {
+          console.error('Error al asistir el curso', error);
+          this.mensajeError = 'Código inválido o error al registrar asistencia.';
+          await this.showAlert('Error', 'Código inválido o error al registrar asistencia.');
+        }
+      );
+    } catch (error) {
+      console.error('Error durante el escaneo o registro:', error);
+      this.mensajeError = 'Error al escanear el QR o procesar el registro.';
+      await this.showAlert('Error', 'Error al escanear el QR o procesar el registro.');
     }
+  }
 
   verHistorial(cursoId: string) {
     console.log(`Ver historial del curso con ID: ${cursoId}`);
