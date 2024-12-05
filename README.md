@@ -31,6 +31,7 @@ npx cap open android
 Construir APK, en Android Studio:
 - Menu: Build -> Build Bundle(s) / APK(s) -> Build APK(s)
 
-
-(Apk para descargar)
+## APK
+Para descargar:
+```bash
 https://github.com/day-alvarez/RegistrApp_Evaluacion2_Alvarez_Navarro/tree/master/APK
